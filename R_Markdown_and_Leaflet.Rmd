@@ -1,0 +1,21 @@
+---
+title: "R_Markdown_and_Leaflet"
+author: "Wido"
+date: '2022-05-27'
+output: html_document
+---
+
+library(leaflet)
+library(tidyverse)
+
+Fagus <- read_csv("https://raw.githubusercontent.com/derek-corcoran-barrios/derek-corcoran-barrios.github.io/master/Presentaciones_Espacial/Nothofagus.csv")
+
+
+
+## Generando el mapa
+Fagus %>% leaflet() %>% addTiles %>% 
+addMarkers(clusterOptions = markerClusterOptions(), popup=Fagus$scrubbed_species_binomial) %>%
+addLegend(labels = "27-05-2022", 
+colors = "#a6cee3", 
+title = "Especies de Nothofagus en Chile", 
+opacity = 0.8)
